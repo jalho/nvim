@@ -22,7 +22,7 @@ vim.wo.relativenumber = true
 
 
 -- [[
---	Start a language server for Zig (zls) when editing 'zig' files.
+-- 	Language server for _Zig_ programming language.
 --
 --	Accessed 2024-07-10: https://github.com/zigtools/zls
 --
@@ -37,8 +37,23 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
     vim.lsp.start({
       name = 'zls',
-   -- cmd = {'name-of-language-server-executable', '--option', 'arg1', 'arg2'},
       cmd = {'zls'},
     })
   end,
 })
+-- [[
+-- 	Language server for _Rust_ programming language.
+--
+--	Accessed 2024-07-14: https://github.com/rust-lang/rust-analyzer/releases/2024-07-08
+--	--> "rust-analyzer-x86_64-unknown-linux-gnu.gz"
+-- ]]
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust', -- not really a "pattern"; somehow maps to "*.rs" files
+  callback = function(args)
+    vim.lsp.start({
+      name = 'rust-analyzer',
+      cmd = {'rust-analyzer'},
+    })
+  end,
+})
+
