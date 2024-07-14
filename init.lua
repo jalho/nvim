@@ -2,6 +2,10 @@ vim.o.clipboard = "unnamedplus" -- Use system clipboard.
 vim.wo.relativenumber = true    -- AKA ":set relativenumber"
 vim.wo.wrap = false             -- AKA ":set nowrap"
 
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldenable = true -- Start folded. Toggling: <z><M>, <z><R>
+
 -- [[
 --     Hotkey: Explore filesystem.
 -- ]]
@@ -55,4 +59,17 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
+-- [
+--    Interface for Tree-sitter.
+--
+--    Accessed 2024-07-14: https://github.com/nvim-treesitter/nvim-treesitter
+-- ]
+vim.o.runtimepath = vim.o.runtimepath .. ',~/.config/nvim/pack/start/nvim-treesitter'
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
 
