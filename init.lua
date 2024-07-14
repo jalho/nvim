@@ -1,36 +1,34 @@
+vim.o.clipboard = "unnamedplus" -- Use system clipboard.
+vim.wo.relativenumber = true    -- AKA ":set relativenumber"
+vim.wo.wrap = false             -- AKA ":set nowrap"
+
 -- [[
--- 	Explore filesystem by `<Space>e`.
+--     Hotkey: Explore filesystem.
 -- ]]
-_G.explore = function()
-    vim.cmd('Explore')
-end
-vim.api.nvim_set_keymap(
-	'n', '<Space>e', '<cmd>lua explore()<CR>',
-	{ noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<C-e>',
+  -- a "traditional" Vim command; no "<cmd>" prefix needed
+  ':Explore<CR>',
+  { noremap = true, silent = true })
 
 -- [[
---	Use system clipboard.
+--     Hotkey: Open a floating diagnostic window.
 -- ]]
-vim.o.clipboard = "unnamedplus"
+vim.api.nvim_set_keymap('n', '<C-Space>',
+  -- a "Lua function"; needs "<cmd>" prefix
+  '<cmd>lua vim.diagnostic.open_float()<CR>',
+  { noremap = true, silent = true })
 
 
 -- [[
---	AKA ":set relativenumber"
--- ]]
-vim.wo.relativenumber = true
-
-
--- [[
--- 	Language server for _Zig_ programming language.
+--     Language server for _Zig_ programming language.
 --
---	Accessed 2024-07-10: https://github.com/zigtools/zls
+--     Accessed 2024-07-10: https://github.com/zigtools/zls
 --
---	To verify all's good, do ':checkhealth lsp' while having a 'zig' file
---	open. It should show the 'zls' being active.
+--     To verify all's good, do ':checkhealth lsp' while having a 'zig' file
+--     open. It should show the 'zls' being active.
 --
---	As of 2024-07-10, one of the features enabled by default by Neovim's
---	LSP client is triggering code completion in INSERT mode by <C-X><C-O>.
+--     As of 2024-07-10, one of the features enabled by default by Neovim's
+--     LSP client is triggering code completion in INSERT mode by <C-X><C-O>.
 -- ]]
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'zig',
@@ -41,11 +39,12 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
 -- [[
--- 	Language server for _Rust_ programming language.
+--     Language server for _Rust_ programming language.
 --
---	Accessed 2024-07-14: https://github.com/rust-lang/rust-analyzer/releases/2024-07-08
---	--> "rust-analyzer-x86_64-unknown-linux-gnu.gz"
+--     Accessed 2024-07-14: https://github.com/rust-lang/rust-analyzer/releases/2024-07-08
+--     --> "rust-analyzer-x86_64-unknown-linux-gnu.gz"
 -- ]]
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'rust', -- not really a "pattern"; somehow maps to "*.rs" files
