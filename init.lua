@@ -11,8 +11,14 @@ vim.api.nvim_set_keymap(
 
 -- [[
 --	Use system clipboard.
--- ]] 
+-- ]]
 vim.o.clipboard = "unnamedplus"
+
+
+-- [[
+--	AKA ":set relativenumber"
+-- ]]
+vim.wo.relativenumber = true
 
 
 -- [[
